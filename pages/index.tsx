@@ -1,10 +1,11 @@
 import Head from "next/head";
-import { Button, Form, Layout, Input, Title } from "antd";
+import { Button, Form, Layout, Input, Typography } from "antd";
 import styles from "../styles/Home.module.css";
 
-const { Header, Footer, Content } = Layout;
+const { Header, Content, Footer } = Layout;
+const { Title } = Typography;
 
-export default function Home() {
+function Home() {
   return (
     <Layout>
     <Head>
@@ -27,7 +28,7 @@ export default function Home() {
                 message: 'Please paste a correct link',
                 type: 'url',
               }]}>
-                <Input placeholder="https://my-super-long-link.com/blah-blah-blah-blah-blah-blah-blah-blah-blah-blah-blah-blah" size="large"/>
+                <Input placeholder="https://my-long-link.com/..." size="large"/>
               </Form.Item>
             </div>
             <div className={styles.linkFieldButton}>
@@ -43,8 +44,10 @@ export default function Home() {
       </div>
     </Content>
     <Footer className={styles.footer}>
-      Yet Another Link Shortener (YALS) &copy; 2021
+      Link Shortener App
     </Footer>
   </Layout>
   );
 }
+
+export default Home;
