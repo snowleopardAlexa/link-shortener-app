@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Button, Form, Layout, Input, Typography } from "antd";
+import { Alert, Button, Form, Layout, Input, Typography } from "antd";
 import styles from "../styles/Home.module.css";
 
 const { Header, Content, Footer } = Layout;
@@ -40,7 +40,7 @@ function Home() {
             </div>
           </div>
         </Form>
-
+        <Alert showIcon message="Please paste correct link" type="error" />
       </div>
     </Content>
     <Footer className={styles.footer}>
