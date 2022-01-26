@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Head from "next/head";
 import { Alert, Button, Form, Layout, Input, Typography } from "antd";
 import styles from "../styles/Home.module.css";
@@ -6,6 +7,13 @@ const { Header, Content, Footer } = Layout;
 const { Title } = Typography;
 
 function Home() {
+  const [status, setStatus] = useState <'initial' | 'error'> ('initial');
+
+// alert function
+const onFinishedFailed = () => {
+   setStatus('error');
+}
+
   return (
     <Layout>
     <Head>
@@ -19,7 +27,7 @@ function Home() {
       <div className={styles.shortner}>
         <Title level={5}>Copy &amp; Paste your lengthy link</Title>
         <Form
-
+         onFinishFailed={onFinishedFailed}
         >
           <div className={styles.linkField}>
             <div className={styles.linkFieldInput}>
@@ -40,7 +48,7 @@ function Home() {
             </div>
           </div>
         </Form>
-        <Alert showIcon message="Please paste correct link" type="error" />
+        {status === 'error' && <Alert showIcon message="Please paste correct link" type="error" />}
       </div>
     </Content>
     <Footer className={styles.footer}>
