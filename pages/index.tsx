@@ -7,19 +7,32 @@ import styles from "../styles/Home.module.css";
 const { Header, Content, Footer } = Layout;
 const { Title } = Typography;
 
+type ShortenLinkResponse = {
+  short_link: string;
+}
+
+type ShortenLinkError = {
+  error: string;
+  error_description: string;
+}
+
 type FormValues = {
   link: string;
 }
 
 function Home() {
-  const [status, setStatus] = useState <'initial' | 'error'> ('initial');
+  const [status, setStatus] = useState <'initial' | 'error' | 'success'> ('initial');
 
-// connect api to db
+// CONNECT API TO DB
 const onFinished = async ({ link }: FormValues) => {
   try {
-     const response = await axios.post('api/shorten_link', { link });
+     const response = await axios.post<ShortenLinkResponse>('api/shorten_link', { link });
+     setStatus('success');
+     setMessage(response.data?.short_link)
   } catch(err) {
-
+     const error = e as AxiosError<ShortenLinkError>;
+     status('error');
+     setMessage(error.response?.data?.error_description || 'Something went wrong');
   }
 }
 
@@ -67,7 +80,7 @@ const onFinishedFailed = () => {
             </div>
           </div>
         </Form>
-        {status === 'error' && <Alert showIcon message="Please paste correct link" type="error" />}
+        {['error', 'success'].includes(status) && <Alert showIcon message="Please paste correct link" type={status} />}
       </div>
     </Content>
     <Footer className={styles.footer}>
