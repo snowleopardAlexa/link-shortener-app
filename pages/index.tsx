@@ -21,7 +21,9 @@ const onFinishedFailed = () => {
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <Header>
-      <div className={styles.logo} />
+      <div className={styles.logo}>
+       Linker  
+      </div>
     </Header>
     <Content className={styles.content}>
       <div className={styles.shortner}>
